@@ -1,7 +1,6 @@
-export PATH=/usr/local/bin:/usr/local/opt/emacs-mac/bin:/Library/PostgreSQL/11/bin/:$PATH
+export PATH=/usr/local/bin:/Library/PostgreSQL/11/bin/:$PATH
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 export XDG_CONFIG_HOME="$HOME/.config"  # for the setting file of neovim
 export NVIM_PYTHON_LOG_FILE=/tmp/log
 export NVIM_PYTHON_LOG_LEVEL=DEBUG
@@ -52,8 +51,6 @@ alias pyl="/usr/local/bin/pylint"
 alias ipy="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython"
 alias ipyj="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython notebook"
 
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/bin/mvim "$@"'
 alias n="/usr/local/bin/nvim"
 alias nd="nvim ~/.cache/dein/plugins/dein.toml ~/.cache/dein/plugins/dein_lazy.toml"
 alias ni="nvim ~/.config/nvim/init.vim"
@@ -85,6 +82,7 @@ alias pg_dump='/Library/PostgreSQL/11/bin/pg_dump'
 alias pg_restore='/Library/PostgreSQL/11/bin/pg_restore'
 
 alias ga='git add'
+alias gs='git status'
 alias gc='git commit -m '
 alias gp='git push origin master'
 
