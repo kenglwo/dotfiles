@@ -1,0 +1,2 @@
+daylog
+this is template file for *.daylog
