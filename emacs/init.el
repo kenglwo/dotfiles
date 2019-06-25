@@ -1,3 +1,10 @@
+;; added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (defun add-to-load-path (&rest paths)
   (let (path)
     (dolist (path paths paths)
@@ -16,17 +23,23 @@
 
 
 (require 'package)
-;; (add-to-list
-;;  'package-archives
-;;  '("marmalade" . "https://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives  '("marmalade" . "http://marmalade-repo.org/packages/") t)
-;; (add-to-list
-;;  'package-archives
-;;  '("melpa" . "https://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-(package-initialize)
+;; HTTPS 系のリポジトリ
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/") t)
 
+;; HTTP 系のリポジトリ
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+
+(add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/") t)
+
+;; marmalade　は HTTP アクセスすると証明書エラーでフリーズするので注意
+;; (add-to-list 'package-archives  '("marmalade" . "http://marmalade-repo.org/packages/") t)
+
+(package-initialize) ; インストール済みのElispを読み込む
 
 ;; setting for Mac
 (when (eq system-type 'darwin)
@@ -36,21 +49,20 @@
 
 ;; do not show startup message
 (setq inhibit-startup-message 1)
+
 ;; do not show menu when started in terminal
 (if (eq window-system 'x)
 	(menu-bar-mode 1) (menu-bar-mode 0))
 (menu-bar-mode nil)
+
 ;; delete message of scratch
 (setq initial-scratch-message "")
 
 ;; 1 scroll moves 1 line
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 5)))
+
 ;; stop exceleration of scroll
 (setq mouse-wheel-progressive-speed nil)
-
-(golden-ratio-mode 1)
-(add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
-
 
 ;; remove tool and scroll bar 
 (when window-system
@@ -63,8 +75,8 @@
 (define-key global-map (kbd "C-c l") 'toggle-truncate-lines)
 
 (define-key global-map (kbd "C-t") 'other-window)
-(column-number-mode t)
 
+(column-number-mode t)
 
 ;;(setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
@@ -75,17 +87,19 @@
 (global-linum-mode t)
 
 (setq-default tab-width 4)
+
 (setq-default indent-tabs-mode t)
 
-(set-face-background 'region "orange")
+(set-face-background 'region "darkgreen")
 
 (set-face-attribute 'default nil
 					:family "RictyDiminishedDiscord NF"
-					:height 160)
+					:height 150)
 
-(set-fontset-font
- nil 'japanese-jisx0208
- (font-spec :family "Noto Sans CJK JP"))
+;; (set-fontset-font
+;;  nil 'japanese-jisx0208
+;;  (font-spec :family "Noto Sans CJK JP"))
+;;心はいつもはれ
 
 (global-hl-line-mode t)
 
@@ -96,13 +110,17 @@
 ;;(set-face-background 'show-paren-match-face "pink")
 (transient-mark-mode 1)
 
+
+(load-theme 'madhat2r t)
 ;; (load-theme 'wombat t)
 ;; (load-theme 'atom-one-dark t)
 ;; (load-theme 'monokai t)
-(load-theme 'madhat2r t)
+;; (load-theme 'zenburn t)
 
+(golden-ratio-mode 1)
+(add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
 
-(require 'undo-tree)					;
+(require 'undo-tree)
 
 ;;-------------------------------------------------------------------
 (require 'helm-config)
@@ -130,6 +148,7 @@
 (define-key isearch-mode-map (kbd "C-o") 'helm-occur-from-isearch) ; isearchからhelm-occurを起動
 (define-key helm-map (kbd "C-c C-a") 'all-from-helm-occur) ; helm-occurからall-extに受け渡し
 ;;------------------------------------------------------------------
+
 
 
 (when (require 'auto-complete-config nil t)
@@ -212,12 +231,20 @@
   (add-to-list 'auto-mode-alist '("//.js//'" . web-mode))
 )
 
-(ido-mode 1)
-(ido-everywhere 1
-(setq ido-enable-flex-matching t) ;; 中間/あいまい検索一致
+;; (i-mode 1)
+;; (ido-everywhere 1)
+;; (setq ido-enable-flex-matching t) ;; 中間/あいまい検索一致
 
 (define-key global-map (kbd "C-h") 'delete-backward-char)
 
 (if window-system 
     (progn
-      (set-frame-parameter nil 'alpha 85)))
+      (set-frame-parameter nil 'alpha 90)))
+
+;; 透明度を変更するコマンド M-x set-alpha
+(defun set-alpha (alpha-num)
+  "set frame parameter 'alpha"
+  (interactive "nAlpha: ")
+  (set-frame-parameter nil 'alpha (cons alpha-num '(90))))
+
+(set-frame-parameter nil 'fullscreen 'maximized)
