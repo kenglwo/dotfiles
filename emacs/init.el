@@ -247,4 +247,7 @@
   (interactive "nAlpha: ")
   (set-frame-parameter nil 'alpha (cons alpha-num '(90))))
 
-(set-frame-parameter nil 'fullscreen 'maximized)
+(,set-frame-parameter nil 'fullscreen 'maximized)
+
+;; automatically insert brackets
+(electric-pair-mode 1)
