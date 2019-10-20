@@ -1,5 +1,6 @@
 export PATH=/usr/local/bin:/usr/local/opt/emacs-mac/bin:/Library/PostgreSQL/11/bin/:$PATH
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="$PATH:`yarn global bin`"
 
 export EDITOR=/usr/local/bin/nvim
 export XDG_CONFIG_HOME="$HOME/.config"  # for the setting file of neovim
@@ -38,16 +39,20 @@ setopt numericglobsort
 export LSCOLORS=hxfxcxdxbxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
-alias e='emacsclient -t'
-alias daemon-emacs="emacs --daemon"
+alias eg='emacsclient --create-frame' # emacs as GUI
+alias et='emacsclient -t' # emacs on terminal
+alias edaemon="emacs --daemon"
 alias ekill="emacsclient -e '(kill-emacs)'"
+alias edebug="emacs --debug-init"
 
 alias ls="ls -GFh"
 alias lsa="ls -A"
 alias ll='ls -lt'
 alias gls="gls --color"
 
-alias py="/usr/local/Cellar/python/3.7.1/bin/python3.7"
+alias py="/anaconda3/bin/python"
+alias python3="/anaconda3/bin/python"
+alias pip3="/anaconda3/bin/pip"
 alias pyl="/usr/local/bin/pylint"
 alias ipy="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython"
 alias ipyj="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython notebook"
