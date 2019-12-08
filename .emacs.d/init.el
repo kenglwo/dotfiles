@@ -3,7 +3,7 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 
 ;; You may delete these explanatory comments.
-(package-initialize)
+;;(package-initialize)
 
 (defun add-to-load-path (&rest paths)
   (let (path)
@@ -71,9 +71,7 @@
 
 ;; C-m (newline-and-indent)
 (define-key global-map (kbd "C-m") 'newline-and-indent)
-
 (define-key global-map (kbd "C-c l") 'toggle-truncate-lines)
-
 (define-key global-map (kbd "C-t") 'other-window)
 
 (column-number-mode t)
@@ -94,7 +92,7 @@
 
 (set-face-attribute 'default nil
 					:family "RictyDiminishedDiscord NF"
-					:height 150)
+					:height 130)
 
 ;; (set-fontset-font
 ;;  nil 'japanese-jisx0208
@@ -112,10 +110,9 @@
 
 
 (load-theme 'madhat2r t)
-;; (load-theme 'wombat t)
-;; (load-theme 'atom-one-dark t)
-;; (load-theme 'monokai t)
-;; (load-theme 'zenburn t)
+;;(load-theme 'wombat t)
+;;(load-theme 'atom-one-dark t)
+;;(load-theme 'monokai-pro t)
 
 (golden-ratio-mode 1)
 (add-to-list 'golden-ratio-exclude-buffer-names " *NeoTree*")
@@ -125,6 +122,7 @@
 ;;-------------------------------------------------------------------
 (require 'helm-config)
 (helm-mode 1)
+
 (define-key helm-map (kbd "C-h") 'delete-backward-char)
 (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
 
@@ -137,7 +135,6 @@
 
 ;; キーバインド
 (global-set-key (kbd "C-c h") 'helm-mini)
-(global-set-key (kbd "<f10>") 'helm-mini)
 (define-key global-map (kbd "C-x b")   'helm-buffers-list)
 ;;(define-key global-map (kbd "C-x b") 'helm-for-files)
 (define-key global-map (kbd "C-x C-f") 'helm-find-files)
@@ -155,7 +152,14 @@
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
  (ac-config-default)
  (setq ac-use-menu-map t)
- (setq ac-ignore-case nil))
+ (setq ac-ignore-case nil)
+ (add-to-list 'ac-modes 'text-mode)         ;; text-modeでも自動的に有効にする
+ (add-to-list 'ac-modes 'fundamental-mode)  ;; fundamental-mode
+ (add-to-list 'ac-modes 'org-mode)
+ (add-to-list 'ac-modes 'yatex-mode)
+ (ac-set-trigger-key "TAB")
+ (setq ac-use-fuzzy t))          ;; 曖昧マッチ
+
 
 
 (when (require 'color-moccur nil t)
@@ -163,13 +167,24 @@
  (setq moccur-split-word t))
 
 (require 'moccur-edit nil t)
-
-(defadvice moccur-edit-change-file
+;; type r to edit on result view
+;; type C-c C-u to discard modifications
+;; type C-c C-k to discard changes
+;; type C-x C-s to save the changes
+(defadvice moccur-edit-change-file ; autosave changes
   (after save-after-moccur-edit-buffer activate)
   (save-buffer))
 
+;; edit result view of grep
+;; type C-c C-p to edit on grep buffer
+;; type C-c C-k to discard changes
+;; type C-c C-c to apply changes
+;; M-x wgrep-save-all-buffers 
 (require 'wgrep nil t)
 
+;; C-x u to show undotree
+;; type q to go to the state
+;; type t to toggle time view
 (when (require 'undohist nil t)
   (undohist-initialize))
 
@@ -184,6 +199,10 @@
 )
 
 
+;; C-z c to create new screen
+;; C-z p to move to previous screen
+;; C-z n to move to next screen
+;; C-z k to remove the current screen
 (setq elscreen-prefix-key (kbd "C-z"))
 (when (require 'elscreen nil t)
   (elscreen-start))
@@ -193,6 +212,8 @@
   	(define-key elscreen-map (kbd "C-z") 'suspend-emacs))
 
 
+;; C-c ,, to open howm-menu
+;; C-c C-c to save and close the current buffer
 (setq howm-directory (concat user-emacs-directory "howm"))
 (setq howm-menu-lang 'ja)
 (setq howm-file-name-format "%Y/%m/%Y-%m-%d.howm")
@@ -206,8 +227,50 @@
 	(kill-buffer nil)))
 
 (define-key howm-mode-map (kbd "C-c C-c") 'howm-save-buffer-and-kill)
-  
+
+(cua-mode t)
+(setq cua-enable-cua-keys nil) ; disable CUA keybinds
+
 (put 'narrow-to-region 'disabled nil)
+
+;; M-x smartparens-mode to enable this minor mode
+(require 'smartparens-config)
+(smartparens-global-mode)
+
+;; Magit
+(setq-default magit-auto-revert-mode nil)
+(setq vc-handled-backends '())
+(eval-after-load "vc" '(remove-hook 'find-file-hooks 'vc-find-file-hook))
+(define-key global-map (kbd "C-x m") 'magit-status)
+(define-key global-map (kbd "C-c l") 'magit-blame)
+
+(custom-set-faces
+ '(magit-diff-added ((t (:background "black" :foreground "green"))))
+ '(magit-diff-added-highlight ((t (:background "white" :foreground "green"))))
+ '(magit-diff-removed ((t (:background "black" :foreground "blue"))))
+ '(magit-diff-removed-hightlight ((t (:background "white" :foreground "blue"))))
+ '(magit-hash ((t (:foreground "red"))))
+)
+
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+
+;; rainbow-delimiters を使うための設定
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;; 括弧の色を強調する設定
+(require 'cl-lib)
+(require 'color)
+(defun rainbow-delimiters-using-stronger-colors ()
+  (interactive)
+  (cl-loop
+   for index from 1 to rainbow-delimiters-max-face-count
+   do
+   (let ((face (intern (format "rainbow-delimiters-depth-%d-face" index))))
+    (cl-callf color-saturate-name (face-foreground face) 30))))
+(add-hook 'emacs-startup-hook 'rainbow-delimiters-using-stronger-colors)
 
 ;; quickrun was installed
 (custom-set-variables
@@ -247,7 +310,39 @@
   (interactive "nAlpha: ")
   (set-frame-parameter nil 'alpha (cons alpha-num '(90))))
 
-(,set-frame-parameter nil 'fullscreen 'maximized)
+(set-frame-parameter nil 'fullscreen 'maximized)
 
 ;; automatically insert brackets
-(electric-pair-mode 1)
+;;(electric-pair-mode 1)
+
+
+;; spaceline similar to poweline
+(use-package spaceline-config
+  :init
+  (progn
+    (setq powerline-default-separator 'slant)
+    ;; anti aging power-line.
+    (setq ns-use-srgb-colorspace nil))
+  :config
+  (progn
+    (spaceline-emacs-theme)))
+
+;; paradox mode on
+(spaceline-toggle-paradox-menu-on)
+
+;; anti aging power-line.
+;; (setq ns-use-srgb-colorspace t)
+(mode-icons-mode)
+(setq mode-icons-grayscale-transform nil)
+
+(use-package spaceline-config)
+(setq powerline-height 16)
+
+(spaceline-emacs-theme)
+;;(require 'spaceline-all-the-icons)
+
+(use-package all-the-icons)
+(all-the-icons-octicon "file-binary")
+(require 'neotree)
+(global-set-key (kbd "C-c C-n") 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
