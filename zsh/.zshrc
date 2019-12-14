@@ -1,6 +1,7 @@
 export PATH=/usr/local/bin:/usr/local/opt/emacs-mac/bin:/Library/PostgreSQL/11/bin/:$PATH
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="$PATH:`yarn global bin`"
+export PATH=$PATH:/usr/local/go/bin
 
 export EDITOR=/usr/local/bin/nvim
 export XDG_CONFIG_HOME="$HOME/.config"  # for the setting file of neovim
@@ -50,9 +51,9 @@ alias lsa="ls -A"
 alias ll='ls -lt'
 alias gls="gls --color"
 
-alias py="/anaconda3/bin/python"
-alias python3="/anaconda3/bin/python"
-alias pip3="/anaconda3/bin/pip"
+alias py="/opt/anaconda3/bin/python"
+alias python3="/opt/anaconda3/bin/python"
+alias pip3="/opt/anaconda3/bin/pip"
 alias pyl="/usr/local/bin/pylint"
 alias ipy="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython"
 alias ipyj="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython notebook"
