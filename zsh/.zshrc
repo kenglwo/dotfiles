@@ -51,9 +51,9 @@ alias lsa="ls -A"
 alias ll='ls -lt'
 alias gls="gls --color"
 
-alias py="/opt/anaconda3/bin/python"
-alias python3="/opt/anaconda3/bin/python"
-alias pip3="/opt/anaconda3/bin/pip"
+alias py="~/opt/anaconda3/bin/python"
+alias python3="~/opt/anaconda3/bin/python"
+alias pip3="~/opt/anaconda3/bin/pip"
 alias pyl="/usr/local/bin/pylint"
 alias ipy="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython"
 alias ipyj="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython notebook"
