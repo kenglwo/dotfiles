@@ -1,0 +1,22 @@
+---
+This is the documentation file of vint
+---
+cmdargs:
+  # Checking more strictly
+  severity: style_problem
+
+  # Enable coloring
+  color: true
+
+  # Enable Neovim syntax
+  env:
+    neovim: true
+
+policies:
+  # Disable a violation
+  ProhibitSomethingEvil:
+    enabled: false
+
+  # Enable a violation
+  ProhibitSomethingBad:
+    enabled: true

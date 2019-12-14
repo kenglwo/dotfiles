@@ -14,12 +14,12 @@ set visualbell
 set showmatch
 
 "indent
-set tabstop=4 "the length of <Tab> in a file
+set tabstop=2 "the length of <Tab> in a file
 set expandtab "replace <Tab> to space
-set softtabstop=4 "the length of space being put when you enter <Tab>
+set softtabstop=2 "the length of space being put when you enter <Tab>
 set autoindent
 set smartindent
-set shiftwidth=4 "the length of space automatically put by Vim
+set shiftwidth=2 "the length of space automatically put by Vim
 
 "text saerch
 set hlsearch

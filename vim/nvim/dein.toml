@@ -4,14 +4,52 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 hook_add = '''
-    nnoremap <silent> <space>db :<C-u>Denite -mode=normal buffer<CR>
-    nnoremap <silent> <space>df :<C-u>DeniteBufferDir -mode=normal -buffer-name=files file<CR>
-    nnoremap <silent> <space>dm :<C-u>Denite -mode=normal file_mru<CR>
-    nnoremap <silent> <space>dr :<C-u>Denite -mode=normal -buffer-name=register register<CR>
-    nnoremap <silent> <space>dg :<C-u>Denite -mode=normal -auto_preview grep<CR>
-    nnoremap <silent> <space>dc :<C-u>DeniteCursorWord -mode=normal grep<CR>
-    nnoremap <silent> <space>da :<C-u>Denite -mode=normal -resume<CR>
-    nnoremap <silent> <space>dp :<C-u>Denite -mode=normal neoyank<CR>
+	autocmd FileType denite call s:denite_my_settings()
+	function! s:denite_my_settings() abort
+	  nnoremap <silent><buffer><expr> <CR>
+	  \ denite#do_map('do_action')
+	  nnoremap <silent><buffer><expr> d
+	  \ denite#do_map('do_action', 'delete')
+	  nnoremap <silent><buffer><expr> p
+	  \ denite#do_map('do_action', 'preview')
+	  nnoremap <silent><buffer><expr> q
+	  \ denite#do_map('quit')
+	  nnoremap <silent><buffer><expr> i
+	  \ denite#do_map('open_filter_buffer')
+	  nnoremap <silent><buffer><expr> <Space>
+	  \ denite#do_map('toggle_select').'j'
+	endfunction
+    nnoremap <silent> <space>db :<C-u>Denite buffer<CR>
+    nnoremap <silent> <space>df :<C-u>DeniteBufferDir -buffer-name=files file<CR>
+    nnoremap <silent> <space>dm :<C-u>Denite file_mru<CR>
+    nnoremap <silent> <space>dr :<C-u>Denite -buffer-name=register register<CR>
+    nnoremap <silent> <space>dg :<C-u>Denite -auto_preview grep<CR>
+    nnoremap <silent> <space>dc :<C-u>DeniteCursorWord grep<CR>
+    nnoremap <silent> <space>da :<C-u>Denite -resume<CR>
+    nnoremap <silent> <space>dp :<C-u>Denite neoyank<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_source = ['denite.vim']
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = ['denite.vim']
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
 '''
 
 [[plugins]]
@@ -31,18 +69,23 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/neoyank.vim'
-on_source = ['denite.vim']
-
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-on_source = ['denite.vim']
-
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+    let g:webdevicons_enable = 1
+    let g:webdevicons_enable_denite = 1
+    let g:webdevicons_enable_nerdtree = 1
+    let g:webdevicons_conceal_nerdtree_brackets = 1
+    let g:webdevicons_enable_airline_tabline = 1
+    let g:webdevicons_enable_airline_statusline = 1
+    let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
+    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+    let g:DevIconsEnableFoldersOpenClose = 1
+    let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
+'''
 
 [[plugins]]
 repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
 depends = ['nerdtree']
-
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
@@ -60,19 +103,8 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-hook_post_update = '''
-  if dein#util#_is_windows()
-    let cmd = 'tools\\update-dll-mingw'
-  elseif dein#util#_is_cygwin()
-    let cmd = 'make -f make_cygwin.mak'
-  elseif executable('gmake')
-    let cmd = 'gmake'
-  else
-    let cmd = 'make'
-  endif
-  let g:dein#plugin.build = cmd
-'''
+repo='airblade/vim-gitgutter'
+depends = ['vim-fugitive']
 
 
 [[plugins]]
@@ -101,7 +133,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
-
 
 [[plugins]]
 repo = 'MattesGroeger/vim-bookmarks'
@@ -140,7 +171,6 @@ function! BookmarkUnmapKeys()
 endfunction
 '''
 
-
 [[plugins]]
 repo = 'tomtom/tcomment_vim'
 
@@ -177,52 +207,51 @@ hook_add = '''
     autocmd BufEnter NERD_tree_* :call BookmarkUnmapKeys()
 '''
 
-
 [[plugins]]
 repo = 'tpope/vim-surround'
 
+[[plugins]]
+repo = 'tpope/vim-repeat'
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_add = '''
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_delay = 0
-  let g:deoplete#auto_complete_start_length = 1
-  let g:deoplete#enable_camel_case = 0
-  let g:deoplete#enable_ignore_case = 0
-  let g:deoplete#enable_refresh_always = 0
-  let g:deoplete#enable_smart_case = 1
-  let g:deoplete#file#enable_buffer_path = 1
-  let g:deoplete#max_list = 10000
-  inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-        \ neosnippet#expandable_or_jumpable() ?
-        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
-on_i = 1
-
+repo = 'tpope/vim-speeddating'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'Shougo/neosnippet.vim'
+on_source = ['deoplete.nvim']
 hook_source = '''
-  imap <C-k> <Plug>(neosnippet_expand_or_jump)
-  smap <C-k> <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k> <Plug>(neosnippet_expand_target)
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
+	imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+	smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+	xmap <C-k>     <Plug>(neosnippet_expand_target)
+	if has('conceal')
+		set conceallevel=2 concealcursor=niv
+	endif
 '''
 on_i  = 1
 on_ft = ['snippet']
 depends = ['neosnippet-snippets']
 
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  "Tab補完の設定
+  inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+        \ neosnippet#expandable_or_jumpable() ?
+        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
+on_i = 1
+
+[[plugins]]
+repo = 'deoplete-plugins/deoplete-jedi'
+on_source = ['deoplete.nvim']
 
 [[plugins]]
 repo = 'Shougo/neco-syntax'
 on_source = ['deoplete.nvim']
-
 
 [[plugins]]
 repo = 'w0rp/ale'
@@ -230,14 +259,14 @@ hook_add = '''
 	nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 	nmap <silent> <C-j> <Plug>(ale_next_wrap)
 	let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-    let g:ale_lint_on_enter = 1
-    let g:ale_lint_on_save = 1
-    let g:ale_lint_on_text_changed = 1
-    let g:ale_sign_column_always = 1
-    let g:ale_open_list = 0
-    let g:ale_set_loclist = 1
-    let g:ale_set_quickfix = 0
-    let g:ale_keep_list_window_open = 0
+  let g:ale_lint_on_enter = 1
+  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_text_changed = 1
+  let g:ale_sign_column_always = 1
+  let g:ale_open_list = 0
+  let g:ale_set_loclist = 1
+  let g:ale_set_quickfix = 0
+  let g:ale_keep_list_window_open = 0
 	let g:ale_fixers = {
 	\   'javascript': ['prettier', 'eslint'],
 	\   'typescript': ['prettier', 'eslint'],
@@ -247,56 +276,18 @@ hook_add = '''
 	let g:ale_fix_on_save = 1
 	let g:airline#extensions#ale#enabled = 1
 	let g:ale_set_highlights = 0
-    let g:ale_linters = {
-          \ 'html': ['tidy'],
-          \ 'css': ['stylelint'],
-          \ 'python': ['pylint'],
-          \ 'javascript': ['eslint'],
-          \ 'typescript': ['tslint'],
-          \ 'vue': ['eslint']
-          \ }
+	let g:ale_linters = {
+		\ 'html': ['tidy'],
+		\ 'css': ['stylelint'],
+		\ 'python': ['pylint'],
+		\ 'javascript': ['eslint'],
+		\ 'typescript': ['tslint'],
+		\ 'vue': ['eslint'],
+		\	'swift': ['swiftlint'],
+		\	'yaml': ['yamllint'],
+		\	'vim': ['vint']
+		\}
 '''
-
-
-[[plugins]]
-repo = 'Vimjas/vim-python-pep8-indent'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
-
-[[plugins]]
-repo = 'lervag/vimtex'
-hook_add = '''
-    let g:vimtex_compiler_latexmk = {
-          \ 'background': 1,
-          \ 'build_dir': '',
-          \ 'continuous': 1,
-          \ 'options': [
-          \    '-pdfdvi',
-          \    '-verbose',
-          \    '-file-line-error',
-          \    '-synctex=1',
-          \    '-interaction=nonstopmode',
-          \],
-          \}
-
-    let g:vimtex_view_general_viewer
-          \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-    let g:vimtex_view_general_options = '-r @line @pdf @tex'
-'''
-
-
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
-hook_add = '''
-    let g:webdevicons_enable = 1
-    let g:webdevicons_enable_denite = 1
-    let g:webdevicons_enable_nerdtree = 1
-    let g:webdevicons_conceal_nerdtree_brackets = 1
-    let g:webdevicons_enable_airline_tabline = 1
-    let g:webdevicons_enable_airline_statusline = 1
-    let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
-    let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-    let g:DevIconsEnableFoldersOpenClose = 1
-    let g:WebDevIconsUnicodeByteOrderMarkerDefaultSymbol = ''
-'''

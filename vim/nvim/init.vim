@@ -14,12 +14,12 @@ set visualbell
 set showmatch
 
 "indent
-set tabstop=4 "the length of <Tab> in a file
+set tabstop=2 "the length of <Tab> in a file
 " set expandtab "replace <Tab> to space
-set softtabstop=4 "the length of space being put when you enter <Tab>
+set softtabstop=2 "the length of space being put when you enter <Tab>
 set autoindent
 set smartindent
-set shiftwidth=4 "the length of space automatically put by Vim
+set shiftwidth=2 "the length of space automatically put by Vim
 
 "text saerch
 set hlsearch
@@ -99,7 +99,7 @@ imap <C-a> <Home>
 imap <C-e> <End>
 
 "enabel Python3 for denite.vim
-let g:python3_host_prog = expand('/usr/local/bin/python3')
+let g:python3_host_prog = expand('/anaconda3/bin/python')
 
 nnoremap q[ :cprevious<CR>   " 前へ
 nnoremap q] :cnext<CR>       " 次へ
