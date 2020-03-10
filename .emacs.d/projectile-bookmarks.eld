@@ -1,1 +1,1 @@
-("~/dotfiles/" "~/Documents/GitHub/router/")
+("~/Documents/GitHub/Rails/iccrc/" "~/dotfiles/" "/Applications/MAMP/htdocs/iccrc/")

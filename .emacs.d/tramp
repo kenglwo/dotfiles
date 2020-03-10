@@ -1,0 +1,25 @@
+;; -*- emacs-lisp -*- <20/03/06 12:08:20 /Users/kento/.emacs.d/tramp>
+;; Tramp connection history.  Don't change this file.
+;; You can delete it, forcing Tramp to reapply the checks.
+
+(((tramp-file-name "ssh" "iccrc" nil "133.30.188.133" nil nil nil)
+  ("uname" "Linux 3.10.0-957.el7.x86_64")
+  ("locale" "LC_ALL=en_US.utf8")
+  ("test" "test")
+  ("remote-path"
+   ("/usr/bin" "/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
+  ("remote-shell" "/bin/sh")
+  ("~" "/home/iccrc")
+  ("file-exists" "test -e")
+  ("stat" "env QUOTING_STYLE=locale \\stat")
+  ("id" "/usr/bin/id")
+  ("gid-integer" 1000)
+  ("gid-string" "iccrc")
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl")
+  ("case-insensitive" nil)
+  ("readlink" "\\readlink")
+  ("ls" "/usr/bin/ls --color=never")
+  ("ls-quoting-style" t)
+  ("ls-dired" t)))
