@@ -86,9 +86,9 @@ alias -s txt=vim
 alias sshk='ssh -l kento 10.83.53.46'
 alias sftpk='sftp kento@10.83.53.46'
 
-alias psql='/Library/PostgreSQL/11/bin/psql'
-alias pg_dump='/Library/PostgreSQL/11/bin/pg_dump'
-alias pg_restore='/Library/PostgreSQL/11/bin/pg_restore'
+# alias psql='/Library/PostgreSQL/11/bin/psql'
+# alias pg_dump='/Library/PostgreSQL/11/bin/pg_dump'
+# alias pg_restore='/Library/PostgreSQL/11/bin/pg_restore'
 
 alias gs='git status'
 alias ga='git add'
@@ -107,3 +107,7 @@ typeset -U path cdpath fpath manpath
 
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+
+alias wd='yarn webpack:dev'
+alias sd='yarn start:dev'
