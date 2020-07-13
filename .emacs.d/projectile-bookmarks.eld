@@ -1,1 +1,1 @@
-("/Applications/MAMP/htdocs/iccrc/" "~/Documents/GitHub/Rails/iccrc/" "~/dotfiles/")
+("/Applications/MAMP/htdocs/student_registration/" "~/dotfiles/" "~/Documents/GitHub/Rails/mimamori-coder/" "~/Documents/GitHub/Rails/edu/" "/Applications/MAMP/htdocs/iccrc/" "~/Documents/GitHub/Rails/nurse-intern/" "~/Documents/GitHub/Rails/iccrc/")
