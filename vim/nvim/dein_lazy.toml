@@ -1,4 +1,36 @@
 [[plugins]]
+repo = 'othree/yajs.vim'
+on_ft = ['javascript', 'javascript.jsx']
+
+[[plugins]]
+repo = 'othree/es.next.syntax.vim'
+on_ft = ['javascript', 'javascript.jsx']
+
+[[plugins]]
+repo = 'othree/javascript-libraries-syntax.vim'
+on_ft = ['javascript', 'javascript.jsx']
+hook_add = '''
+  " Setup used libraries
+  let g:used_javascript_libs = 'jquery,react,d3'
+  let b:javascript_lib_use_jquery = 1
+  let b:javascript_lib_use_react = 1
+  let b:javascript_lib_use_d3 = 1
+'''
+
+[[plugins]]
+repo = 'othree/html5.vim'
+on_ft = ['html']
+
+[[plugins]]
+repo = 'HerringtonDarkholme/yats.vim'
+on_ft = ['typescript', 'typescript.react', 'typescriptreact']
+
+[[plugins]]
+repo = 'maxmellon/vim-jsx-pretty'
+on_ft = ['typescript', 'javascript', 'typescript.react', 'typescriptreact']
+
+
+[[plugins]]
 repo = 'plasticboy/vim-markdown'
 on_ft = ['markdown']
 hook_add = '''
@@ -42,9 +74,24 @@ hook_add = '''
 
 [[plugins]]
 repo = 'leafgarland/typescript-vim'
-on_ft = ['typescript']
+on_ft = ['typescript', 'typescript.react', 'typescriptreact']
 hook_add = '''
 	let g:typescript_indent_disable = 1
+'''
+
+[[plugins]]
+repo = 'peitalin/vim-jsx-typescript'
+on_ft = ['typescript', 'typescript.react', 'typescriptreact']
+hook_add = '''
+	" dark red
+	hi tsxTagName guifg=#E06C75
+	" orange
+	hi tsxCloseString guifg=#F99575
+	hi tsxCloseTag guifg=#F99575
+	hi tsxAttributeBraces guifg=#F99575
+	hi tsxEqual guifg=#F99575
+	" yellow
+	hi tsxAttrib guifg=#F8BD7F cterm=italic
 '''
 
 [[plugins]]
@@ -58,7 +105,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'jason0x43/vim-js-indent'
-on_ft = ['javascript', 'typescript']
+on_ft = ['javascript', 'typescript', 'typescriptreact']
 hook_add = '''
 '''
 
@@ -85,15 +132,3 @@ on_map = ['<Space>tm']
 [[plugins]]
 repo = 'Vimjas/vim-python-pep8-indent'
 on_ft = ['python']
-
-[[plugins]]
-repo = 'lvht/phpcd.vim'
-on_ft = ['php']
-hook_add = '''
-	let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
-	let g:deoplete#ignore_sources.php = ['omni']
-'''
-
-[[plugins]]
-repo = 'severin-lemaignan/vim-minimap'
-on_map = ['<Leader>mm']

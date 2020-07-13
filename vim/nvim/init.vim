@@ -44,8 +44,8 @@ augroup END
 
 " enable syntax color for ejs file
 autocmd BufNewFile,BufRead *.ejs set filetype=ejs
-
 autocmd BufNewFile,BufRead *.toml set filetype=vim
+
 
 "shortcuts for daily log
 nnoremap <F6> <ESC>i---> <C-R>=strftime("%Y/%m/%d %H:%M")<CR> ---><CR>
@@ -99,7 +99,7 @@ imap <C-a> <Home>
 imap <C-e> <End>
 
 "enabel Python3 for denite.vim
-let g:python3_host_prog = expand('/anaconda3/bin/python')
+let g:python3_host_prog = expand('~/opt/anaconda3/bin/python')
 
 nnoremap q[ :cprevious<CR>   " 前へ
 nnoremap q] :cnext<CR>       " 次へ
@@ -112,6 +112,12 @@ set conceallevel=3
 set concealcursor=nvic
 
 au BufNewFile,BufRead *.ejs setf js
+
+" Esc to go back command mode in terminal mode
+tnoremap <silent> <ESC> <C-\><C-n>
+
+" for syntaxhighlit of tsx and jsx
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 
 "dein---------------------------------------------------------------------
 if &compatible
