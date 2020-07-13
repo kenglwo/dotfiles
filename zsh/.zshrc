@@ -86,14 +86,22 @@ alias -s txt=vim
 alias sshk='ssh -l kento 10.83.53.46'
 alias sftpk='sftp kento@10.83.53.46'
 
+alias sshi='ssh iccrc@133.30.188.133'
+alias sshk='ssh otnekoygihs@133.30.244.51'
+alias sftpi='sftp iccrc@133.30.188.133'
+
 # alias psql='/Library/PostgreSQL/11/bin/psql'
 # alias pg_dump='/Library/PostgreSQL/11/bin/pg_dump'
 # alias pg_restore='/Library/PostgreSQL/11/bin/pg_restore'
 
 alias gs='git status'
 alias ga='git add'
-alias gc='git commit -m '
-alias gp='git push origin master'
+alias go='git commit -m '
+alias gl='git pull origin'
+alias gh='git push origin'
+alias gc='git checkout'
+alias gr='git rebase'
+alias gd='git diff'
 
 
 setopt listrowsfirst
