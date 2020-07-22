@@ -82,18 +82,21 @@ alias -s log=vim
 alias -s txt=vim
 # alias -s sh=vim
 
-# alias sshk='ssh -l kawamura puffy.cla.kobe-u.ac.jp'
-alias sshk='ssh -l kento 10.83.53.46'
+alias sshk='ssh -l kawamura puffy.cla.kobe-u.ac.jp'
+# alias sshk='ssh -l kento 10.83.53.46'
 alias sftpk='sftp kento@10.83.53.46'
 
-alias psql='/Library/PostgreSQL/11/bin/psql'
+#alias psql='/Library/PostgreSQL/11/bin/psql'
 alias pg_dump='/Library/PostgreSQL/11/bin/pg_dump'
 alias pg_restore='/Library/PostgreSQL/11/bin/pg_restore'
 
 alias gs='git status'
+alias gl='git pull origin'
+alias gh='git push origin'
+alias gc='git checkout'
 alias ga='git add'
-alias gc='git commit -m '
-alias gp='git push origin master'
+alias go='git commit -m'
+alias gr='git rebase'
 
 
 setopt listrowsfirst
@@ -107,3 +110,4 @@ typeset -U path cdpath fpath manpath
 
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+eval "$(rbenv init -)"
