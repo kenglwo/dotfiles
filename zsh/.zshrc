@@ -51,9 +51,9 @@ alias lsa="ls -A"
 alias ll='ls -lt'
 alias gls="gls --color"
 
-alias py="/opt/anaconda3/bin/python"
-alias python3="/opt/anaconda3/bin/python"
-alias pip3="/opt/anaconda3/bin/pip"
+alias py="~/opt/anaconda3/bin/python"
+alias python3="~/opt/anaconda3/bin/python"
+alias pip3="~/opt/anaconda3/bin/pip"
 alias pyl="/usr/local/bin/pylint"
 alias ipy="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython"
 alias ipyj="/usr/local/Cellar/python/3.7.1/bin/python3.7 -m IPython notebook"
@@ -86,18 +86,25 @@ alias sshk='ssh -l kawamura puffy.cla.kobe-u.ac.jp'
 # alias sshk='ssh -l kento 10.83.53.46'
 alias sftpk='sftp kento@10.83.53.46'
 
-#alias psql='/Library/PostgreSQL/11/bin/psql'
-alias pg_dump='/Library/PostgreSQL/11/bin/pg_dump'
-alias pg_restore='/Library/PostgreSQL/11/bin/pg_restore'
+alias sshi='ssh iccrc@133.30.188.133'
+alias sshk='ssh otnekoygihs@133.30.244.51'
+alias sftpi='sftp iccrc@133.30.188.133'
+
+# alias psql='/Library/PostgreSQL/11/bin/psql'
+# alias pg_dump='/Library/PostgreSQL/11/bin/pg_dump'
+# alias pg_restore='/Library/PostgreSQL/11/bin/pg_restore'
 
 alias gs='git status'
 alias gl='git pull origin'
 alias gh='git push origin'
 alias gc='git checkout'
 alias ga='git add'
-alias go='git commit -m'
+alias go='git commit -m '
+alias gl='git pull origin'
+alias gh='git push origin'
+alias gc='git checkout'
 alias gr='git rebase'
-
+alias gd='git diff'
 
 setopt listrowsfirst
 setopt listtypes
@@ -107,7 +114,6 @@ setopt notify
 
 #重複パスを登録しない
 typeset -U path cdpath fpath manpath
-
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 eval "$(rbenv init -)"

@@ -77,6 +77,8 @@ hook_add = '''
     let g:webdevicons_conceal_nerdtree_brackets = 1
     let g:webdevicons_enable_airline_tabline = 1
     let g:webdevicons_enable_airline_statusline = 1
+		let g:WebDevIconsNerdTreeBeforeGlyphPadding = ' '
+		let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
     let g:WebDevIconsNerdTreeGitPluginForceVAlign = 1
     let g:WebDevIconsUnicodeDecorateFolderNodes = 1
     let g:DevIconsEnableFoldersOpenClose = 1
@@ -99,7 +101,6 @@ hook_add = '''
     nnoremap <silent><Leader>gm :Gmerge<CR>
     nnoremap <silent><Leader>gp :Gpush origin master<CR>
     nnoremap <silent><Leader>gl :Glog<CR>
-
 '''
 
 [[plugins]]
@@ -216,42 +217,6 @@ repo = 'tpope/vim-repeat'
 [[plugins]]
 repo = 'tpope/vim-speeddating'
 
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-on_source = ['deoplete.nvim']
-hook_source = '''
-	imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-	smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-	xmap <C-k>     <Plug>(neosnippet_expand_target)
-	if has('conceal')
-		set conceallevel=2 concealcursor=niv
-	endif
-'''
-on_i  = 1
-on_ft = ['snippet']
-depends = ['neosnippet-snippets']
-
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_source = '''
-  let g:deoplete#enable_at_startup = 1
-  "Tab補完の設定
-  inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-        \ neosnippet#expandable_or_jumpable() ?
-        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
-on_i = 1
-
-[[plugins]]
-repo = 'deoplete-plugins/deoplete-jedi'
-on_source = ['deoplete.nvim']
-
-[[plugins]]
-repo = 'Shougo/neco-syntax'
-on_source = ['deoplete.nvim']
 
 [[plugins]]
 repo = 'w0rp/ale'
@@ -270,8 +235,11 @@ hook_add = '''
 	let g:ale_fixers = {
 	\   'javascript': ['prettier', 'eslint'],
 	\   'typescript': ['prettier', 'eslint'],
+	\   'typescript.react': ['prettier', 'eslint'],
+	\   'typescriptreact': ['prettier', 'eslint'],
 	\   'python': ['prettier', 'pylint'],
 	\   'css': ['prettier', 'stylelint'],
+	\   'ruby': ['rubocop']
 	\}
 	let g:ale_fix_on_save = 1
 	let g:airline#extensions#ale#enabled = 1
@@ -281,11 +249,14 @@ hook_add = '''
 		\ 'css': ['stylelint'],
 		\ 'python': ['pylint'],
 		\ 'javascript': ['eslint'],
-		\ 'typescript': ['tslint'],
+		\ 'typescript': [''],
+		\ 'typescript.react': [''],
+		\ 'typescriptreact': [''],
 		\ 'vue': ['eslint'],
 		\	'swift': ['swiftlint'],
 		\	'yaml': ['yamllint'],
-		\	'vim': ['vint']
+		\	'vim': ['vint'],
+		\ 'ruby': ['rubocop']
 		\}
 '''
 
